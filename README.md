@@ -34,7 +34,7 @@
 
 ## Thành Viên
 - **Hồ Sỹ Hào** - 2274801030043
-- **Lý Khoa Đăng**
+- **Lý Khoa Đăng** - 2274801030034
 - **Nguyễn Quang Lộc** - 2274801030086
 - **Nguyễn Huỳnh Gia Bảo** - 2274801030010
 - **Bùi Quang Huy** - 2274801030010
