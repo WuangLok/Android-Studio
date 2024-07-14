@@ -33,7 +33,7 @@
 - **Hiển thị ngẫu nhiên:** Hiển thị một đặc sản ngẫu nhiên mỗi khi người dùng mở ứng dụng.
 
 ## Thành Viên
-- **Hồ Sỹ Hào**
+- **Hồ Sỹ Hào** - 2274801030043
 - **Lý Khoa Đăng**
 - **Nguyễn Quang Lộc** - 2274801030086
 - **Nguyễn Huỳnh Gia Bảo** - 2274801030010
