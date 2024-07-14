@@ -1,6 +1,6 @@
 # Đồ Án Văn Lang Năm 2 - Ngành Kĩ Thuật Phần Mềm
 
-## Lớp 233_71SEMO30054_02
+## Lớp 233_71SEMO30054_02 - Kì Hè (2024)
 
 **Giảng Viên:** Nguyễn Thị Bích Ngân
 
