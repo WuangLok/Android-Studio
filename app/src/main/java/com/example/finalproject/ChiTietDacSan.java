@@ -35,6 +35,8 @@ public class ChiTietDacSan extends AppCompatActivity {
             txtSangTao.setText(intent.getStringExtra("sangTao"));
 
             String hinhAnh = intent.getStringExtra("hinhAnh");
+            int resID = getResources().getIdentifier(hinhAnh, "drawable", getPackageName());
+            imgHinhAnh.setImageResource(resID);
 
         }
     }
