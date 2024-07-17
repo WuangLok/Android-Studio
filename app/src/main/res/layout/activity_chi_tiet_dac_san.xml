@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imgHinhAnh"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtTenMonAn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgHinhAnh"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Tên Món Ăn" />
+
+    <TextView
+        android:id="@+id/txtLoaiMonAn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtTenMonAn"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Loại Món Ăn" />
+
+    <TextView
+        android:id="@+id/txtVungMien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtLoaiMonAn"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Vùng Miền" />
+
+    <TextView
+        android:id="@+id/txtCongThuc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtVungMien"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Công Thức" />
+
+    <TextView
+        android:id="@+id/txtLichSu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtCongThuc"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Lịch Sử" />
+
+    <TextView
+        android:id="@+id/txtSangTao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtLichSu"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Sáng Tạo" />
+
+</RelativeLayout>

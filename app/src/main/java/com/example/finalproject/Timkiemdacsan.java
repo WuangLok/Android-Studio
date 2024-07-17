@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,7 @@ public class Timkiemdacsan extends AppCompatActivity {
         AddEvents();
         LoadSpinnerData();
         LoadJsonData();
+
     }
 
     private void AddControls() {
@@ -58,6 +60,24 @@ public class Timkiemdacsan extends AppCompatActivity {
                 String idMonAn = edtIdMonAn.getText().toString().trim();
                 String vungMien = spnVungMien.getSelectedItem().toString();
                 TimKiemMonAn(tenMonAn, idMonAn, vungMien);
+            }
+
+        });
+        lvMonAn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MonAn selectedMonAn = dsMonAn.get(position);
+                Intent intent = new Intent(Timkiemdacsan.this, ChiTietDacSan.class);
+                intent.putExtra("id", selectedMonAn.getId());
+                intent.putExtra("tenMonAn", selectedMonAn.getTenMonAn());
+                intent.putExtra("loaiMonAn", selectedMonAn.getLoaiMonAn());
+                intent.putExtra("vungMien", selectedMonAn.getVungMien());
+                intent.putExtra("hinhAnh", selectedMonAn.getHinhAnh());
+                intent.putExtra("congThuc", selectedMonAn.getCongThuc());
+                intent.putExtra("lichSu", selectedMonAn.getLichSu());
+                intent.putExtra("sangTao", selectedMonAn.getSangTao());
+                intent.putExtra("favorite", selectedMonAn.isFarvorite());
+                startActivity(intent);
             }
         });
 
