@@ -12,8 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.finalproject.TimKiem.MonAn;
+
 import java.util.List;
-import java.util.Random;
 
 public class AdapterDacSanRandom extends ArrayAdapter<MonAn> {
 

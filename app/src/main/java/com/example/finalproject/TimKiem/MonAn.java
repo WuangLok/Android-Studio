@@ -1,9 +1,13 @@
-package com.example.finalproject;
+package com.example.finalproject.TimKiem;
 
 public class MonAn {
  private int id;
  private String tenMonAn , loaiMonAn, vungMien,HinhAnh,CongThuc,LichSu,SangTao;
  private boolean farvorite;
+
+    public MonAn() {
+
+    }
 
     public int getId() {
         return id;

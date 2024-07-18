@@ -1,6 +1,8 @@
-package com.example.finalproject;
+package com.example.finalproject.Yeuthich;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.finalproject.DBHandler.DBHelper;
+import com.example.finalproject.R;
 
 import java.util.ArrayList;
 
@@ -35,7 +40,7 @@ public class AdapterYeuThich extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return position; // Return position as ID
     }
 
     @Override
@@ -63,7 +68,7 @@ public class AdapterYeuThich extends BaseAdapter {
         holder.txtName.setText(yeuThich.getTenMonAn());
         holder.txtType.setText(yeuThich.getLoaiMonAn());
 
-        if (yeuThich.isFarvorite()) {
+        if (yeuThich.getFavorite() == 1) {
             holder.btnHeart.setImageResource(R.drawable.redheart);
         } else {
             holder.btnHeart.setImageResource(R.drawable.emptyheart);
@@ -72,7 +77,20 @@ public class AdapterYeuThich extends BaseAdapter {
         holder.btnHeart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                yeuThich.setFarvorite(!yeuThich.isFarvorite());
+                DBHelper dbHelper = new DBHelper(context);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                // Toggle favorite status
+                yeuThich.setFavorite(yeuThich.getFavorite() == 1 ? 0 : 1);
+
+                // Update the database
+                ContentValues values = new ContentValues();
+                values.put("favorite", yeuThich.getFavorite());
+
+                // Perform the update using the correct query format
+                db.update("dacsan", values, "_id = ?", new String[]{String.valueOf(yeuThich.getId())});
+
+                // Notify the adapter that the dataset has changed
                 notifyDataSetChanged();
             }
         });

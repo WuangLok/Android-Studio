@@ -1,9 +1,13 @@
-package com.example.finalproject;
+package com.example.finalproject.Yeuthich;
 
 public class YeuThich {
     private int id;
     private String tenMonAn, loaiMonAn, vungMien, hinhAnh, congThuc, lichSu, sangTao;
-    private boolean farvorite;
+    private int favorite; // Corrected spelling
+
+    public YeuThich() {
+
+    }
 
     public int getId() {
         return id;
@@ -69,15 +73,16 @@ public class YeuThich {
         this.sangTao = sangTao;
     }
 
-    public boolean isFarvorite() {
-        return farvorite;
+
+    public int getFavorite() {
+        return favorite;
     }
 
-    public void setFarvorite(boolean farvorite) {
-        this.farvorite = farvorite;
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
     }
 
-    public YeuThich(int id, String tenMonAn, String loaiMonAn, String vungMien, String hinhAnh, String congThuc, String lichSu, String sangTao, boolean farvorite) {
+    public YeuThich(int id, String tenMonAn, String loaiMonAn, String vungMien, String hinhAnh, String congThuc, String lichSu, String sangTao, boolean favorite) {
         this.id = id;
         this.tenMonAn = tenMonAn;
         this.loaiMonAn = loaiMonAn;
@@ -86,6 +91,6 @@ public class YeuThich {
         this.congThuc = congThuc;
         this.lichSu = lichSu;
         this.sangTao = sangTao;
-        this.farvorite = farvorite;
+        // Corrected spelling
     }
 }

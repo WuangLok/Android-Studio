@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.TimKiem;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +13,9 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.finalproject.DBHandler.DBHelper;
+import com.example.finalproject.R;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,16 +25,19 @@ public class Timkiemdacsan extends AppCompatActivity {
     ListView lvMonAn;
     Spinner spnVungMien;
     ArrayList<MonAn> dsMonAn = new ArrayList<>();
-    AdapterDacSan adapterDacSan ;
+    AdapterDacSan adapterDacSan;
+    DBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timkiemdacsan);
+        dbHelper = new DBHelper(getApplicationContext());
+
         AddControls();
         AddEvents();
         LoadSpinnerData();
-        LoadJsonData();
-
+        LoadSQLiteData();
     }
 
     private void AddControls() {
@@ -61,8 +60,8 @@ public class Timkiemdacsan extends AppCompatActivity {
                 String vungMien = spnVungMien.getSelectedItem().toString();
                 TimKiemMonAn(tenMonAn, idMonAn, vungMien);
             }
-
         });
+
         lvMonAn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -106,62 +105,16 @@ public class Timkiemdacsan extends AppCompatActivity {
         spnVungMien.setAdapter(spinnerAdapter);
     }
 
-    private void LoadJsonData() {
-        String jsonStr = loadJSONFromAsset("dacsan.json");
-        if (jsonStr != null) {
-            ArrayList<MonAn> list = parseJsonToDacSanList(jsonStr);
-            if (list != null) {
-                dsMonAn.addAll(list);
-                adapterDacSan.notifyDataSetChanged();
-                Log.d("DEBUG", "Data loaded, size: " + dsMonAn.size());
-            } else {
-                Log.d("DEBUG", "Parsed list is null");
-            }
-        } else {
-            Log.d("DEBUG", "JSON string is null");
-        }
-    }
-
-
-    private String loadJSONFromAsset(String fileName) {
-        String json = null;
+    private void LoadSQLiteData() {
         try {
-            InputStream is = getAssets().open(fileName);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, StandardCharsets.UTF_8);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            dsMonAn.clear();
+            dsMonAn.addAll(dbHelper.getAllMonAn());
+            adapterDacSan.notifyDataSetChanged();
+            Log.d("DEBUG", "Data loaded from SQLite, size: " + dsMonAn.size());
+        } catch (Exception e) {
+            Log.e("ERROR", "Error loading data from SQLite: " + e.getMessage());
+            // Handle error (e.g., display a message to the user)
         }
-        return json;
-    }
-
-    private ArrayList<MonAn> parseJsonToDacSanList(String jsonStr) {
-        ArrayList<MonAn> dacSanList = new ArrayList<>();
-        try {
-            JSONArray jsonArray = new JSONArray(jsonStr);
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject obj = jsonArray.getJSONObject(i);
-                MonAn dacSan = new MonAn(
-                        obj.getInt("id"),
-                        obj.getString("tenMonAn"),
-                        obj.getString("loaiMonAn"),
-                        obj.getString("vungMien"),
-                        obj.getString("hinhAnh"),
-                        obj.getString("congThuc"),
-                        obj.getString("lichSu"),
-                        obj.getString("sangTao"),
-                        obj.getBoolean("farvorite")
-                );
-                dacSanList.add(dacSan);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return dacSanList;
     }
 
     private void TimKiemMonAn(String tenMonAn, String idMonAn, String vungMien) {

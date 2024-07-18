@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.TimKiem;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.example.finalproject.R;
 
 import java.util.List;
 
