@@ -61,4 +61,14 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Check out this cool Application");
+        intent.putExtra(Intent.EXTRA_TEXT, "Your Application Link Here");
+        startActivity(Intent.createChooser(intent, "Share Via"));
+        return super.onOptionsItemSelected(item);
+    }
 }
