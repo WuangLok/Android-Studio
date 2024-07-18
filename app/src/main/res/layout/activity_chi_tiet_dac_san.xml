@@ -8,7 +8,6 @@
         android:id="@+id/imgHinhAnh"
         android:layout_width="300dp"
         android:layout_height="300dp"
-
         android:scaleType="centerCrop"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -67,5 +66,23 @@
         android:layout_marginTop="8dp"
         android:textSize="16sp"
         android:text="Sáng Tạo" />
+
+    <Button
+        android:id="@+id/btnChiaSe"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/txtSangTao"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Chia Sẻ" />
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/btnChiaSe"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Trở Lại" />
+
 
 </RelativeLayout>

@@ -2,6 +2,8 @@ package com.example.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,12 +13,15 @@ public class ChiTietDacSan extends AppCompatActivity {
 
     TextView txtTenMonAn, txtLoaiMonAn, txtVungMien, txtCongThuc, txtLichSu, txtSangTao;
     ImageView imgHinhAnh;
+    Button btnChiaSe, btnTroLai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chi_tiet_dac_san);
 
+        btnTroLai = findViewById(R.id.btnBack);
+        btnChiaSe = findViewById(R.id.btnChiaSe);
         txtTenMonAn = findViewById(R.id.txtTenMonAn);
         txtLoaiMonAn = findViewById(R.id.txtLoaiMonAn);
         txtVungMien = findViewById(R.id.txtVungMien);
@@ -38,6 +43,25 @@ public class ChiTietDacSan extends AppCompatActivity {
             int resID = getResources().getIdentifier(hinhAnh, "drawable", getPackageName());
             imgHinhAnh.setImageResource(resID);
 
+            btnChiaSe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    String shareBody = "Tên món ăn: " + txtTenMonAn.getText();
+                    String shareSub = "Món Ăn: " + txtVungMien.getText() + ", Với Lịch Sử: " + txtLichSu.getText();
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                    startActivity(Intent.createChooser(shareIntent, "Share using"));
+                }
+            });
+
+            btnTroLai.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
         }
     }
 }
