@@ -22,7 +22,7 @@
 - **Đóng góp thông tin:** Cho phép người dùng đóng góp thông tin về đặc sản mà họ biết.
 - **Giao diện nhập liệu:** Cung cấp giao diện để nhập tên, hình ảnh, công thức, và mô tả.
 
-### Lưu danh sách yêu thích:
+### Lưu danh sách yêu thích: Quang Huy
 - **Đánh dấu yêu thích:** Người dùng có thể đánh dấu đặc sản yêu thích để dễ dàng theo dõi.
 - **Lưu trữ:** Lưu trữ danh sách yêu thích trong ứng dụng.
 
@@ -38,3 +38,4 @@
 - **Nguyễn Quang Lộc** - 2274801030086
 - **Nguyễn Huỳnh Gia Bảo** - 2274801030010
 - **Bùi Quang Huy** - 2274801030010
+- **Phạm Nguyễn Bá Minh** - 2274801030088
