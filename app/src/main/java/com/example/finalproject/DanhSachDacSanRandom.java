@@ -1,7 +1,5 @@
-// DanhSachDacSanRandom.java
 package com.example.finalproject;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -10,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.finalproject.TimKiem.MonAn;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class DanhSachDacSanRandom extends AppCompatActivity {
 
@@ -24,57 +22,64 @@ public class DanhSachDacSanRandom extends AppCompatActivity {
     AdapterDacSanRandom customAdapter;
     ArrayList<MonAn> specialties;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.customlv_hiendacsanngaunhien);
+        setContentView(R.layout.activity_danhsachdacsanrandom);
 
         lvDacSan = findViewById(R.id.lvDanhSachDacSan);
-        specialties = new ArrayList<>();
 
-        // Load data from JSON file
-        loadSpecialtiesFromJson();
+        // Load the JSON data
+        String json = loadJSONFromAsset();
+        if (json != null) {
+            List<MonAn> monAnList = parseJSON(json);
 
-        // Shuffle the list to randomize the order
-        Collections.shuffle(specialties);
+            // Shuffle the list for random display
+            Collections.shuffle(monAnList, new Random());
 
-        // Setup adapter
-        customAdapter = new AdapterDacSanRandom(this, specialties);
-        lvDacSan.setAdapter(customAdapter);
+            // Set the adapter
+            customAdapter = new AdapterDacSanRandom(this, monAnList);
+            lvDacSan.setAdapter(customAdapter);
+        }
     }
 
-    private void loadSpecialtiesFromJson() {
-        String json;
+    private String loadJSONFromAsset() {
         try {
-            // Load JSON file from assets
+            // Change "your_json_file.json" to the actual name of your JSON file in assets
             InputStream is = getAssets().open("dacsan.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
+            return new String(buffer, "UTF-8");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
-            // Parse JSON data
+    private List<MonAn> parseJSON(String json) {
+        List<MonAn> monAnList = new ArrayList<>();
+        try {
             JSONArray jsonArray = new JSONArray(json);
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                int id = jsonObject.getInt("id");
-                String tenMonAn = jsonObject.getString("tenMonAn");
-                String loaiMonAn = jsonObject.getString("loaiMonAn");
-                String vungMien = jsonObject.getString("vungMien");
-                String hinhAnh = jsonObject.getString("hinhAnh");
-                String congThuc = jsonObject.getString("congThuc");
-                String lichSu = jsonObject.getString("lichSu");
-                String sangTao = jsonObject.getString("sangTao");
-                boolean favorite = jsonObject.getBoolean("farvorite");
-
-                MonAn monAn = new MonAn(id, tenMonAn, loaiMonAn, vungMien, hinhAnh, congThuc, lichSu, sangTao, favorite);
-                specialties.add(monAn);
+                JSONObject obj = jsonArray.getJSONObject(i);
+                MonAn monAn = new MonAn(
+                        obj.getInt("id"),
+                        obj.getString("tenMonAn"),
+                        obj.getString("loaiMonAn"),
+                        obj.getString("vungMien"),
+                        obj.getString("hinhAnh"),
+                        obj.getString("congThuc"),
+                        obj.getString("lichSu"),
+                        obj.getString("sangTao"),
+                        obj.getBoolean("farvorite")
+                );
+                monAnList.add(monAn);
             }
-
-        } catch (IOException | JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        return monAnList;
     }
 }

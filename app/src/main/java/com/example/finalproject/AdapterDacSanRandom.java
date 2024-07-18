@@ -1,4 +1,3 @@
-// AdapterDacSanRandom.java
 package com.example.finalproject;
 
 import android.content.Context;
@@ -22,7 +21,7 @@ public class AdapterDacSanRandom extends ArrayAdapter<MonAn> {
     private List<MonAn> dacsanList;
 
     public AdapterDacSanRandom(@NonNull Context context, @NonNull List<MonAn> list) {
-        super(context, 0 , list);
+        super(context, 0, list);
         this.context = context;
         this.dacsanList = list;
     }
@@ -50,4 +49,3 @@ public class AdapterDacSanRandom extends ArrayAdapter<MonAn> {
         return listItem;
     }
 }
-
