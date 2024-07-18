@@ -20,7 +20,7 @@
 
 ### Thêm đặc sản mới: Khoa Đăng
 - **Đóng góp thông tin:** Cho phép người dùng đóng góp thông tin về đặc sản mà họ biết.
-- **Giao diện nhập liệu:** Cung cấp giao diện để nhập tên, hình ảnh, công thức, và mô tả.
+- **Giao diện nhập liệu:** Cung cấp giao diện để nhập tên, hình ảnh, công thức, và lich su va sang tao.
 
 ### Lưu danh sách yêu thích: Quang Huy
 - **Đánh dấu yêu thích:** Người dùng có thể đánh dấu đặc sản yêu thích để dễ dàng theo dõi.
