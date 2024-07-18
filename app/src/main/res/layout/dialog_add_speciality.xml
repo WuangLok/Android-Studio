@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?android:attr/colorBackground">
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Tên món ăn"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:inputType="textCapWords"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Hình ảnh (URL)"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:inputType="textUri"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etRegion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Vùng miền"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:inputType="textCapWords"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etLichsu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Lịch sử"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:inputType="textCapSentences"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etSangtao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:hint="Sáng tạo"
+        android:padding="12dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:inputType="textCapSentences"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnSubmit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:layout_gravity="center"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Đóng góp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+</LinearLayout>

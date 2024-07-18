@@ -19,6 +19,17 @@
     "congThuc": "Recipe for Bun Bo Hue",
     "lichSu": "History of Bun Bo Hue",
     "sangTao": "Creator of Bun Bo Hue",
+    "farvorite": true
+  },
+  {
+    "id": 3,
+    "tenMonAn": "Hu Tieu Nam Vang",
+    "loaiMonAn": "Main Course",
+    "vungMien": "Nam",
+    "hinhAnh": "hutieunamvang",
+    "congThuc": "Recipe for Hu Tieu Nam Vang",
+    "lichSu": "History of Hu Tieu Nam Vang",
+    "sangTao": "Creator of Hu Tieu Nam Vang",
     "farvorite": false
   }
 ]

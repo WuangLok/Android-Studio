@@ -13,16 +13,25 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
-            android:name=".Danhsachyeuthich"
+            android:name=".ItemSpecialityActivity"
             android:exported="false" />
         <activity
             android:name=".Timkiemdacsan"
             android:exported="false" />
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Danhsachyeuthich"
+            android:exported="false" />
+        <activity
+            android:name=".DongGopThongTin"
+            android:exported="false" />
+        <activity
             android:name=".ChiTietDacSan"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".DanhSachDacSanRandom"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
