@@ -6,7 +6,7 @@
 
 ## Đề Tài : Đặc Sản Vùng Miền
 
-### Danh sách đặc sản theo vùng miền:
+### Danh sách đặc sản theo vùng miền: Lộc
 - **Hiển thị danh sách đặc sản từ các vùng miền khác nhau:** Bắc, Trung, Nam.
 - **Phân loại theo loại đặc sản:** món ăn mặn, bánh kẹo, trái cây, thảo dược, đồ uống, v.v.
 
@@ -36,6 +36,4 @@
 - **Hồ Sỹ Hào** - 2274801030043
 - **Lý Khoa Đăng** - 2274801030034
 - **Nguyễn Quang Lộc** - 2274801030086
-- **Nguyễn Huỳnh Gia Bảo** - 2274801030010
-- **Bùi Quang Huy** - 2274801030010
 - **Phạm Nguyễn Bá Minh** - 2274801030088
