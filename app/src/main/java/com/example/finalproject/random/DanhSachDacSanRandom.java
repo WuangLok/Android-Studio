@@ -13,7 +13,6 @@ public class DanhSachDacSanRandom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danhsachdacsanrandom);
 
-        // Chỉ khởi tạo Fragment nếu không có trạng thái lưu lại
         if (savedInstanceState == null) {
             RandomFragment randomFragment = RandomFragment.newInstance();
             FragmentManager fragmentManager = getSupportFragmentManager();
