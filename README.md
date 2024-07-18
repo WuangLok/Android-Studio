@@ -26,7 +26,7 @@
 - **Đánh dấu yêu thích:** Người dùng có thể đánh dấu đặc sản yêu thích để dễ dàng theo dõi.
 - **Lưu trữ:** Lưu trữ danh sách yêu thích trong ứng dụng.
 
-### Chia sẻ đặc sản: Bá Minh
+### Chia sẻ đặc sản: Lộc
 - **Chia sẻ thông tin:** Cho phép người dùng chia sẻ thông tin về đặc sản qua mạng xã hội hoặc qua tin nhắn.
 
 ### Gợi ý đặc sản ngẫu nhiên:
