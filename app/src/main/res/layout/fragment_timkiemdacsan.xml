@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".TimKiem.Timkiemdacsan">
-
-    <EditText
-        android:id="@+id/EdtIdMonAn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Id Món Ăn"
-        android:inputType="text" />
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/EdtTenMonAn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:hint="Tên Món Ăn"
         android:inputType="text" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vùng miền:"
+        android:textStyle="bold"
+        android:textColor="#979797"
+        android:textSize="16sp"
+        android:paddingTop="8dp" />
+
     <Spinner
         android:id="@+id/SpinnerVungMien"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Loại đặc sản:"
+        android:textStyle="bold"
+        android:textColor="#979797"
+        android:textSize="16sp"
+        android:paddingTop="8dp" />
+
+    <Spinner
+        android:id="@+id/SpinnerLoaiMonAn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

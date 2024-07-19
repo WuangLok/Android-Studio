@@ -4,4 +4,16 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="region_array">
+        <item>Bắc</item>
+        <item>Trung</item>
+        <item>Nam</item>
+    </string-array>
+
+    <string-array name="loai_mon_an_array">
+        <item>Món ăn no</item>
+        <item>Món ăn chơi</item>
+        <item>Trái cây</item>
+        <item>Đồ uống</item>
+    </string-array>
 </resources>

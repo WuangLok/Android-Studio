@@ -11,8 +11,9 @@ public class Speciality implements Parcelable {
     private String lichsu;
     private String sangtao;
     private boolean favorite;
+    private String congThuc;
 
-    public Speciality(int id, String tenMonAn, String vungMien, String hinhAnh, String lichsu, String sangtao, boolean favorite) {
+    public Speciality(int id, String tenMonAn, String vungMien, String hinhAnh, String lichsu, String sangtao, boolean favorite, String congThuc) {
         this.id = id;
         this.tenMonAn = tenMonAn;
         this.vungMien = vungMien;
@@ -20,6 +21,7 @@ public class Speciality implements Parcelable {
         this.lichsu = lichsu;
         this.sangtao = sangtao;
         this.favorite = favorite;
+        this.congThuc = congThuc;
     }
 
     protected Speciality(Parcel in) {
@@ -30,6 +32,7 @@ public class Speciality implements Parcelable {
         lichsu = in.readString();
         sangtao = in.readString();
         favorite = in.readByte() != 0;
+        congThuc = in.readString();
     }
 
     public static final Creator<Speciality> CREATOR = new Creator<Speciality>() {
@@ -58,6 +61,7 @@ public class Speciality implements Parcelable {
         dest.writeString(lichsu);
         dest.writeString(sangtao);
         dest.writeByte((byte) (favorite ? 1 : 0));
+        dest.writeString(congThuc);
     }
 
     // Getters for all fields
@@ -77,7 +81,7 @@ public class Speciality implements Parcelable {
         return hinhAnh;
     }
 
-    public String getlichsu() {
+    public String getLichsu() {
         return lichsu;
     }
 
@@ -87,5 +91,9 @@ public class Speciality implements Parcelable {
 
     public boolean isFavorite() {
         return favorite;
+    }
+
+    public String getCongThuc() {
+        return congThuc;
     }
 }

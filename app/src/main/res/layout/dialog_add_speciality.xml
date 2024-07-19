@@ -3,77 +3,70 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="?android:attr/colorBackground">
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Tên món ăn"
-        android:padding="12dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:inputType="textCapWords"
-        android:textSize="16sp"
-        android:layout_marginBottom="12dp" />
+        android:hint="Tên món ăn" />
 
     <EditText
         android:id="@+id/etImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Hình ảnh (URL)"
-        android:padding="12dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:inputType="textUri"
-        android:textSize="16sp"
-        android:layout_marginBottom="12dp" />
+        android:hint="Hình ảnh" />
 
-    <EditText
-        android:id="@+id/etRegion"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Vùng miền"
-        android:padding="12dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:inputType="textCapWords"
+        android:text="Vùng miền:"
+        android:textStyle="bold"
+        android:textColor="#979797"
         android:textSize="16sp"
-        android:layout_marginBottom="12dp" />
+        android:paddingTop="8dp" />
+
+    <Spinner
+        android:id="@+id/spnRegion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Loại đặc sản:"
+        android:textStyle="bold"
+        android:textColor="#979797"
+        android:textSize="16sp"
+        android:paddingTop="8dp" />
+
+    <Spinner
+        android:id="@+id/spnLoaiMonAn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/etLichsu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Lịch sử"
-        android:padding="12dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:inputType="textCapSentences"
-        android:textSize="16sp"
-        android:layout_marginBottom="12dp" />
+        android:hint="Lịch sử" />
 
     <EditText
         android:id="@+id/etSangtao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Sáng tạo"
-        android:padding="12dp"
-        android:textColor="?android:attr/textColorPrimary"
-        android:inputType="textCapSentences"
-        android:textSize="16sp"
-        android:layout_marginBottom="16dp" />
+        android:hint="Sáng tạo" />
+
+    <EditText
+        android:id="@+id/etCongThuc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Công thức" />
 
     <Button
         android:id="@+id/btnSubmit1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:layout_gravity="center"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="Đóng góp"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:text="Thêm đặc sản" />
+
 </LinearLayout>

@@ -9,12 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.finalproject.Them.DongGopThongTin;
-import com.example.finalproject.TimKiem.Timkiemdacsan;
-import com.example.finalproject.Yeuthich.Danhsachyeuthich;
-import com.example.finalproject.random.DanhSachDacSanRandom;
+import com.example.finalproject.random.RandomFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.example.finalproject.Them.DongGopThongTinFragment;
+import com.example.finalproject.TimKiem.TimkiemdacsanFragment;
+import com.example.finalproject.Yeuthich.DanhsachyeuthichFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,30 +41,39 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            navigationView.setCheckedItem(R.id.nav_find);
+            navigationView.setCheckedItem(R.id.nav_random);
+            displayFragment(new RandomFragment());
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment selectedFragment = null;
         int id = item.getItemId();
 
         if (id == R.id.nav_find) {
-            startActivity(new Intent(this, Timkiemdacsan.class));
+            selectedFragment = new TimkiemdacsanFragment(); // Assuming you have this fragment
         } else if (id == R.id.nav_favoritelist) {
-            startActivity(new Intent(this, Danhsachyeuthich.class));
+            selectedFragment = new DanhsachyeuthichFragment(); // Assuming you have this fragment
+        } else if (id == R.id.nav_add) {
+            selectedFragment = new DongGopThongTinFragment(); // Assuming you have this fragment
+        } else if (id == R.id.nav_random) {
+            selectedFragment = new RandomFragment();
         }
-        else if (id == R.id.nav_add) {
-            startActivity(new Intent(this, DongGopThongTin.class));
-        }
-        else if (id == R.id.nav_random) {
-            startActivity(new Intent(this, DanhSachDacSanRandom.class));
+
+        if (selectedFragment != null) {
+            displayFragment(selectedFragment);
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    private void displayFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
+    }
 
     @Override
     public void onBackPressed() {
@@ -72,7 +83,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    // share trang web
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent = new Intent(Intent.ACTION_SEND);
