@@ -83,7 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void insertSampleData(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
 
-        values.put("tenMonAn", "Phở");
+        values.put("tenMonAn", "Pho");
         values.put("loaiMonAn", "Món chính");
         values.put("vungMien", "Bắc");
         values.put("hinhAnh", "pho");
@@ -95,7 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("dacsan", null, values);
 
         values.clear();
-        values.put("tenMonAn", "Bún bò Huế");
+        values.put("tenMonAn", "Bun bo Hue");
         values.put("loaiMonAn", "Món chính");
         values.put("vungMien", "Trung");
         values.put("hinhAnh", "bunbohue");
@@ -238,9 +238,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return randomDish;
     }
 
-    public void deleteUserAddedSpecialities() {
+    public void deleteSpecialityById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("dacsan", "isUserAdded = 1", null);
+        db.delete("dacsan", "_id = ?", new String[]{String.valueOf(id)});
         db.close();
     }
 }
+
+

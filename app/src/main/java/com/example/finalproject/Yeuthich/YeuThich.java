@@ -3,10 +3,21 @@ package com.example.finalproject.Yeuthich;
 public class YeuThich {
     private int id;
     private String tenMonAn, loaiMonAn, vungMien, hinhAnh, congThuc, lichSu, sangTao;
-    private int favorite; // Corrected spelling
+    private int favorite; // Sử dụng int để lưu trạng thái yêu thích
 
     public YeuThich() {
+    }
 
+    public YeuThich(int id, String tenMonAn, String loaiMonAn, String vungMien, String hinhAnh, String congThuc, String lichSu, String sangTao, boolean favorite) {
+        this.id = id;
+        this.tenMonAn = tenMonAn;
+        this.loaiMonAn = loaiMonAn;
+        this.vungMien = vungMien;
+        this.hinhAnh = hinhAnh;
+        this.congThuc = congThuc;
+        this.lichSu = lichSu;
+        this.sangTao = sangTao;
+        this.favorite = favorite ? 1 : 0; // Chuyển đổi boolean thành int
     }
 
     public int getId() {
@@ -73,7 +84,6 @@ public class YeuThich {
         this.sangTao = sangTao;
     }
 
-
     public int getFavorite() {
         return favorite;
     }
@@ -82,15 +92,11 @@ public class YeuThich {
         this.favorite = favorite;
     }
 
-    public YeuThich(int id, String tenMonAn, String loaiMonAn, String vungMien, String hinhAnh, String congThuc, String lichSu, String sangTao, boolean favorite) {
-        this.id = id;
-        this.tenMonAn = tenMonAn;
-        this.loaiMonAn = loaiMonAn;
-        this.vungMien = vungMien;
-        this.hinhAnh = hinhAnh;
-        this.congThuc = congThuc;
-        this.lichSu = lichSu;
-        this.sangTao = sangTao;
-        // Corrected spelling
+    public boolean isFavorite() {
+        return favorite == 1;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite ? 1 : 0;
     }
 }

@@ -12,13 +12,13 @@ public class Speciality implements Parcelable {
     private String sangtao;
     private boolean favorite;
 
-    public Speciality(int id, String tenMonAn, String vungMien, String hinhAnh, String congThuc, String moTa, boolean favorite) {
+    public Speciality(int id, String tenMonAn, String vungMien, String hinhAnh, String lichsu, String sangtao, boolean favorite) {
         this.id = id;
         this.tenMonAn = tenMonAn;
         this.vungMien = vungMien;
         this.hinhAnh = hinhAnh;
-        this.lichsu = congThuc;
-        this.sangtao = moTa;
+        this.lichsu = lichsu;
+        this.sangtao = sangtao;
         this.favorite = favorite;
     }
 
