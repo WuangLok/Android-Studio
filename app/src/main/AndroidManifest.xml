@@ -21,7 +21,7 @@
             android:name=".TimKiem.Timkiemdacsan"
             android:exported="false" />
         <activity
-            android:name=".random.DanhSachDacSanRandom"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Yeuthich.Danhsachyeuthich"
@@ -33,7 +33,7 @@
             android:name=".TimKiem.ChiTietDacSan"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".random.DanhSachDacSanRandom"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
