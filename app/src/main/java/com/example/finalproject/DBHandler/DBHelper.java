@@ -1,5 +1,6 @@
 package com.example.finalproject.DBHandler;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -48,6 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS dacsan");
         onCreate(db);
     }
+
     public boolean updateFavoriteStatus(int id, int favoriteStatus) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -126,7 +128,6 @@ public class DBHelper extends SQLiteOpenHelper {
                     yeuThich.setFavorite(cursor.getInt(8));
 
 
-
                     yeuThichList.add(yeuThich);
                 } while (cursor.moveToNext());
             }
@@ -141,7 +142,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return yeuThichList;
     }
-
 
 
     public List<MonAn> getAllMonAn() {
@@ -169,41 +169,41 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return monAnList;
     }
+
     public void updateFavorite(int monAnId, boolean isFavorite) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-            db = this.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put("favorite", isFavorite ? 1 : 0);  // Assuming `favorite` column is of type INTEGER
-            db.update("dacsan", values, "_id = ?", new String[]{String.valueOf(monAnId)});
-            db.close();
-        }
+        db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("favorite", isFavorite ? 1 : 0);  // Assuming `favorite` column is of type INTEGER
+        db.update("dacsan", values, "_id = ?", new String[]{String.valueOf(monAnId)});
+        db.close();
+    }
 
+
+    @SuppressLint("Range")
     public MonAn getRandomMonan() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         MonAn randomDish = null;
 
         try {
-            String[] columns = {"_id", "tenMonAn", "loaiMonAn", "vungMien", "hinhAnh", "congThuc", "lichSu", "sangTao", "favorite"};
-            cursor = db.query("dacsan", columns, "favorite = 1", null, null, null, "RANDOM()", "1");
+            String[] columns = {"_id", "tenMonAn", "loaiMonAn", "vungMien", "hinhAnh", "congThuc", "lichSu", "sangTao"};
+            cursor = db.query("dacsan", columns, null, null, null, null, "RANDOM()", "1");
 
             if (cursor != null && cursor.moveToFirst()) {
                 randomDish = new MonAn();
-                randomDish.setId(cursor.getInt(0));
-                randomDish.setTenMonAn(cursor.getString(1));
-                randomDish.setLoaiMonAn(cursor.getString(2));
-                randomDish.setVungMien(cursor.getString(3));
-                randomDish.setHinhAnh(cursor.getString(4));
-                randomDish.setCongThuc(cursor.getString(5));
-                randomDish.setLichSu(cursor.getString(6));
-                randomDish.setSangTao(cursor.getString(7));
-                randomDish.setFarvorite(cursor.getInt(8) == 1);
-            } else {
-                Log.d("DBHelper", "No random dish found.");
+                randomDish.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+                randomDish.setTenMonAn(cursor.getString(cursor.getColumnIndex("tenMonAn")));
+                randomDish.setLoaiMonAn(cursor.getString(cursor.getColumnIndex("loaiMonAn")));
+                randomDish.setVungMien(cursor.getString(cursor.getColumnIndex("vungMien")));
+                randomDish.setHinhAnh(cursor.getString(cursor.getColumnIndex("hinhAnh")));
+                randomDish.setCongThuc(cursor.getString(cursor.getColumnIndex("congThuc")));
+                randomDish.setLichSu(cursor.getString(cursor.getColumnIndex("lichSu")));
+                randomDish.setSangTao(cursor.getString(cursor.getColumnIndex("sangTao")));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("DBHelper", "Error in getRandomMonan", e);
         } finally {
             if (cursor != null) {
                 cursor.close();

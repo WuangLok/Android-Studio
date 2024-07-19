@@ -4,49 +4,52 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.finalproject.R;
 import com.example.finalproject.TimKiem.MonAn;
 
-import java.util.List;
-
-public class AdapterDacSanRandom extends ArrayAdapter<MonAn> {
-
+public class AdapterDacSanRandom extends RecyclerView.Adapter<AdapterDacSanRandom.ViewHolder> {
     private Context context;
-    private List<MonAn> dacsanList;
+    private MonAn randomDish;
 
-    public AdapterDacSanRandom(@NonNull Context context, @NonNull List<MonAn> list) {
-        super(context, 0, list);
+    public AdapterDacSanRandom(Context context, MonAn randomDish) {
         this.context = context;
-        this.dacsanList = list;
+        this.randomDish = randomDish;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View listItem = convertView;
-        if (listItem == null) {
-            listItem = LayoutInflater.from(context).inflate(R.layout.customlv_hiendacsanngaunhien, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_random, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if (randomDish != null) {
+            holder.tenMonAn.setText(randomDish.getTenMonAn());
+            holder.loaiMonAn.setText(randomDish.getLoaiMonAn());
+            holder.vungMien.setText(randomDish.getVungMien());
+            holder.congThuc.setText(randomDish.getCongThuc());
+            holder.lichSu.setText(randomDish.getLichSu());
+            holder.sangTao.setText(randomDish.getSangTao());
         }
+    }
 
-        MonAn currentDacSan = dacsanList.get(position);
+    @Override
+    public int getItemCount() {
+        return randomDish != null ? 1 : 0;
+    }
 
-        ImageView imageView = listItem.findViewById(R.id.item_image);
-        TextView name = listItem.findViewById(R.id.item_name);
-        TextView type = listItem.findViewById(R.id.item_type);
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tenMonAn, loaiMonAn, vungMien, congThuc, lichSu, sangTao;
 
-        int resID = context.getResources().getIdentifier(currentDacSan.getHinhAnh(), "drawable", context.getPackageName());
-        imageView.setImageResource(resID);
-
-        name.setText(currentDacSan.getTenMonAn());
-        type.setText(currentDacSan.getLoaiMonAn());
-
-        return listItem;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tenMonAn = itemView.findViewById(R.id.tvtenMonan);
+            loaiMonAn = itemView.findViewById(R.id.tvloaiMonan);
+        }
     }
 }
