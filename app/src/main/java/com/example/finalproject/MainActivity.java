@@ -10,8 +10,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.finalproject.Them.DongGopThongTin;
 import com.example.finalproject.TimKiem.Timkiemdacsan;
 import com.example.finalproject.Yeuthich.Danhsachyeuthich;
+import com.example.finalproject.random.DanhSachDacSanRandom;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity
@@ -49,6 +51,12 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(this, Timkiemdacsan.class));
         } else if (id == R.id.nav_favoritelist) {
             startActivity(new Intent(this, Danhsachyeuthich.class));
+        }
+        else if (id == R.id.nav_add) {
+            startActivity(new Intent(this, DongGopThongTin.class));
+        }
+        else if (id == R.id.nav_random) {
+            startActivity(new Intent(this, DanhSachDacSanRandom.class));
         }
 
         drawer.closeDrawer(GravityCompat.START);

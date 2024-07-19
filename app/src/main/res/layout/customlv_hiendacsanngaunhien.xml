@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
-    tools:context=".DanhSachDacSanRandom">
+    tools:context=".random.DanhSachDacSanRandom">
 
     <ImageView
         android:id="@+id/item_image"

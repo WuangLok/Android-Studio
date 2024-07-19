@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.random;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.finalproject.R;
 import com.example.finalproject.TimKiem.MonAn;
 
 import java.util.List;

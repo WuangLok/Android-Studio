@@ -7,4 +7,11 @@
     <item
         android:id="@+id/nav_favoritelist"
         android:title="Danh Sách Yêu Thích" />
+    <item
+        android:id="@+id/nav_add"
+        android:title="Thêm Món Ăn" />
+    <item
+        android:id="@+id/nav_random"
+        android:title="Danh Sách Ngẫu Nhiên"
+        />
 </menu>

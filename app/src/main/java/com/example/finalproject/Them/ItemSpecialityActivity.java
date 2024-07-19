@@ -1,10 +1,12 @@
-package com.example.finalproject;
+package com.example.finalproject.Them;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalproject.R;
 
 import java.util.List;
 

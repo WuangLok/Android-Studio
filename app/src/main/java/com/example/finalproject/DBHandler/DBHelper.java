@@ -48,6 +48,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS dacsan");
         onCreate(db);
     }
+    public boolean updateFavoriteStatus(int id, int favoriteStatus) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("favorite", favoriteStatus);
+
+        int rowsAffected = db.update("dacsan", values, "_id = ?", new String[]{String.valueOf(id)});
+        db.close();
+
+        return rowsAffected > 0;
+    }
 
     // Method to insert sample data into the database
     public void insertSampleData(SQLiteDatabase db) {
@@ -90,6 +100,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // Add more sample data as needed
     }
+
     public List<YeuThich> getAllYeuThich() {
         List<YeuThich> yeuThichList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -158,7 +169,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return monAnList;
     }
+    public void updateFavorite(int monAnId, boolean isFavorite) {
+        SQLiteDatabase db = this.getReadableDatabase();
 
 
 
-}
+            db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("favorite", isFavorite ? 1 : 0);  // Assuming `favorite` column is of type INTEGER
+            db.update("dacsan", values, "_id = ?", new String[]{String.valueOf(monAnId)});
+            db.close();
+        }
+    }
+
+
+
+
+
+

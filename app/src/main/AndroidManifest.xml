@@ -15,19 +15,19 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
-            android:name=".ItemSpecialityActivity"
+            android:name=".Them.ItemSpecialityActivity"
             android:exported="false" />
         <activity
             android:name=".TimKiem.Timkiemdacsan"
             android:exported="false" />
         <activity
-            android:name=".DanhSachDacSanRandom"
+            android:name=".random.DanhSachDacSanRandom"
             android:exported="false" />
         <activity
             android:name=".Yeuthich.Danhsachyeuthich"
             android:exported="false" />
         <activity
-            android:name=".DongGopThongTin"
+            android:name=".Them.DongGopThongTin"
             android:exported="false" />
         <activity
             android:name=".TimKiem.ChiTietDacSan"

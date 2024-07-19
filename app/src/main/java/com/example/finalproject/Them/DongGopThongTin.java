@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.Them;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalproject.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,10 +1,11 @@
-package com.example.finalproject;
+package com.example.finalproject.random;
 
 import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finalproject.R;
 import com.example.finalproject.TimKiem.MonAn;
 
 import org.json.JSONArray;
