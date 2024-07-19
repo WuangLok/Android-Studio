@@ -172,8 +172,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public void updateFavorite(int monAnId, boolean isFavorite) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-
-
             db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("favorite", isFavorite ? 1 : 0);  // Assuming `favorite` column is of type INTEGER
@@ -209,10 +207,11 @@ public class DBHelper extends SQLiteOpenHelper {
             }
             db.close();
         }
-
+        // Log the result
+        Log.d("DBHelper", "Random MonAn: " + (randomDish != null ? randomDish.getTenMonAn() : "No data"));
         return randomDish;
     }
-    }
+}
 
 
 
