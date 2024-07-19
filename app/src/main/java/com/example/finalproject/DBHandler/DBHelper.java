@@ -207,7 +207,6 @@ public class DBHelper extends SQLiteOpenHelper {
             }
             db.close();
         }
-        // Log the result
         Log.d("DBHelper", "Random MonAn: " + (randomDish != null ? randomDish.getTenMonAn() : "No data"));
         return randomDish;
     }
