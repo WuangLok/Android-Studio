@@ -1,6 +1,5 @@
 package com.example.finalproject.Them;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.finalproject.DBHandler.DBHelper;
 import com.example.finalproject.R;
+import com.example.finalproject.TimKiem.MonAn;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,11 +32,12 @@ public class DongGopThongTin extends AppCompatActivity {
 
     private Button btnSubmit;
     private Button btnXemDanhSach;
+    private Button btnXoa;
     private RecyclerView recyclerView;
     private List<Speciality> specialityList;
     private SpecialityAdapter adapter;
+    private DBHelper dbHelper;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class DongGopThongTin extends AppCompatActivity {
 
         btnSubmit = findViewById(R.id.btnSubmit);
         btnXemDanhSach = findViewById(R.id.btnXem);
+        btnXoa = findViewById(R.id.btnXoa);
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,7 +53,9 @@ public class DongGopThongTin extends AppCompatActivity {
         adapter = new SpecialityAdapter(this, specialityList);
         recyclerView.setAdapter(adapter);
 
-        loadSpecialitiesFromJson();
+        dbHelper = new DBHelper(this);
+
+        loadSpecialitiesFromDatabase();
 
         btnSubmit.setOnClickListener(view -> showCustomDialog());
 
@@ -68,16 +73,24 @@ public class DongGopThongTin extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(DongGopThongTin.this);
                 builder.setTitle("Danh sách món ăn");
                 builder.setMessage(details.toString());
-                builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                builder.setPositiveButton("Đóng", (dialog, which) -> dialog.dismiss());
                 builder.show();
             } else {
                 Toast.makeText(DongGopThongTin.this, "Danh sách trống", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        btnXoa.setOnClickListener(view -> {
+            new AlertDialog.Builder(DongGopThongTin.this)
+                    .setTitle("Xác nhận")
+                    .setMessage("Bạn có chắc chắn muốn xóa toàn bộ danh sách đã thêm vào?")
+                    .setPositiveButton("Có", (dialog, which) -> {
+                        dbHelper.deleteUserAddedSpecialities();
+                        loadSpecialitiesFromDatabase();
+                        Toast.makeText(DongGopThongTin.this, "Đã xóa danh sách thành công!", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Không", null)
+                    .show();
         });
     }
 
@@ -95,7 +108,6 @@ public class DongGopThongTin extends AppCompatActivity {
         Button btnSubmit1 = dialogView.findViewById(R.id.btnSubmit1);
 
         AlertDialog dialog = builder.create();
-
         dialog.show();
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
@@ -109,6 +121,8 @@ public class DongGopThongTin extends AppCompatActivity {
             if (name.isEmpty() || image.isEmpty() || region.isEmpty() || lichsu.isEmpty() || sangtao.isEmpty()) {
                 Toast.makeText(DongGopThongTin.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             } else {
+                dbHelper.DongGopThongTin(name, "Món chính", region, image, "Công thức đang cập nhật", lichsu, sangtao);
+
                 Speciality newSpeciality = new Speciality(
                         specialityList.size() + 1,
                         name,
@@ -121,7 +135,6 @@ public class DongGopThongTin extends AppCompatActivity {
                 specialityList.add(newSpeciality);
                 adapter.notifyItemInserted(specialityList.size() - 1);
                 Toast.makeText(DongGopThongTin.this, "Đã đóng góp thành công!", Toast.LENGTH_SHORT).show();
-
                 if (specialityList.size() > 0) {
                     btnXemDanhSach.setVisibility(View.VISIBLE);
                 }
@@ -131,35 +144,21 @@ public class DongGopThongTin extends AppCompatActivity {
         });
     }
 
-    private void loadSpecialitiesFromJson() {
-        String json;
-        try {
-            InputStream is = getAssets().open("dacsan.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, StandardCharsets.UTF_8);
-
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                int id = jsonObject.getInt("id");
-                String tenMonAn = jsonObject.getString("tenMonAn");
-                String vungMien = jsonObject.getString("vungMien");
-                String hinhAnh = jsonObject.getString("hinhAnh");
-                String lichsu = jsonObject.getString("lichSu");
-                String sangtao = jsonObject.getString("sangTao");
-                boolean favorite = false;
-
-                Speciality speciality = new Speciality(id, tenMonAn, vungMien, hinhAnh, lichsu, sangtao, favorite);
-                specialityList.add(speciality);
-            }
-            adapter.notifyDataSetChanged();
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error loading specialties", Toast.LENGTH_SHORT).show();
+    private void loadSpecialitiesFromDatabase() {
+        specialityList.clear();
+        List<MonAn> monAnList = dbHelper.getAllMonAn();
+        for (MonAn monAn : monAnList) {
+            Speciality speciality = new Speciality(
+                    monAn.getId(),
+                    monAn.getTenMonAn(),
+                    monAn.getVungMien(),
+                    monAn.getHinhAnh(),
+                    monAn.getLichSu(),
+                    monAn.getSangTao(),
+                    monAn.isFarvorite()
+            );
+            specialityList.add(speciality);
         }
+        adapter.notifyDataSetChanged();
     }
 }

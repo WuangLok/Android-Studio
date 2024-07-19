@@ -16,17 +16,14 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "dacsan.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2; // Tăng version để trigger onUpgrade
 
-
-    // Constructor
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Create the 'dacsan' table
         db.execSQL("CREATE TABLE dacsan (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "tenMonAn TEXT," +
@@ -36,18 +33,40 @@ public class DBHelper extends SQLiteOpenHelper {
                 "congThuc TEXT," +
                 "lichSu TEXT," +
                 "sangTao TEXT," +
-                "favorite INTEGER DEFAULT 0" +
+                "favorite INTEGER DEFAULT 0," +
+                "isUserAdded INTEGER DEFAULT 0" +
                 ")");
 
-        // Insert sample data
         insertSampleData(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop and recreate the table if upgrading the database
-        db.execSQL("DROP TABLE IF EXISTS dacsan");
-        onCreate(db);
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE dacsan ADD COLUMN isUserAdded INTEGER DEFAULT 0");
+        }
+    }
+
+    public void DongGopThongTin(String tenMonAn, String loaiMonAn, String vungMien, String hinhAnh, String congThuc, String lichSu, String sangTao) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenMonAn", tenMonAn);
+        values.put("loaiMonAn", loaiMonAn);
+        values.put("vungMien", vungMien);
+        values.put("hinhAnh", hinhAnh);
+        values.put("congThuc", congThuc);
+        values.put("lichSu", lichSu);
+        values.put("sangTao", sangTao);
+        values.put("favorite", 0);
+        values.put("isUserAdded", 1);  // Đánh dấu món ăn do người dùng thêm vào
+
+        long result = db.insert("dacsan", null, values);
+        if (result == -1) {
+            Log.e("DBHelper", "Failed to insert new dish");
+        } else {
+            Log.d("DBHelper", "New dish inserted successfully");
+        }
+        db.close();
     }
 
     public boolean updateFavoriteStatus(int id, int favoriteStatus) {
@@ -61,11 +80,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return rowsAffected > 0;
     }
 
-    // Method to insert sample data into the database
     public void insertSampleData(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
 
-        // Insert Phở
         values.put("tenMonAn", "Phở");
         values.put("loaiMonAn", "Món chính");
         values.put("vungMien", "Bắc");
@@ -74,9 +91,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("lichSu", "Lịch sử phở");
         values.put("sangTao", "Người sáng tạo phở");
         values.put("favorite", 1);
+        values.put("isUserAdded", 0);
         db.insert("dacsan", null, values);
 
-        // Insert Bún bò Huế
         values.clear();
         values.put("tenMonAn", "Bún bò Huế");
         values.put("loaiMonAn", "Món chính");
@@ -86,9 +103,9 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("lichSu", "Lịch sử bún bò Huế");
         values.put("sangTao", "Người sáng tạo bún bò Huế");
         values.put("favorite", 1);
+        values.put("isUserAdded", 0);
         db.insert("dacsan", null, values);
 
-        // Insert Hu Tieu Nam Vang
         values.clear();
         values.put("tenMonAn", "Hu Tieu Nam Vang");
         values.put("loaiMonAn", "Món chính");
@@ -98,9 +115,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("lichSu", "Lịch sử hu tieu nam vang");
         values.put("sangTao", "Người sáng tạo hu tieu nam vang");
         values.put("favorite", 1);
+        values.put("isUserAdded", 0);
         db.insert("dacsan", null, values);
-
-        // Add more sample data as needed
     }
 
     public List<YeuThich> getAllYeuThich() {
@@ -117,16 +133,15 @@ public class DBHelper extends SQLiteOpenHelper {
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     YeuThich yeuThich = new YeuThich();
-                    yeuThich.setId(cursor.getInt(0));  // Vị trí cột _id
-                    yeuThich.setTenMonAn(cursor.getString(1));  // Vị trí cột tenMonAn
-                    yeuThich.setLoaiMonAn(cursor.getString(2));  // Vị trí cột loaiMonAn
-                    yeuThich.setVungMien(cursor.getString(3));  // Vị trí cột vungMien
-                    yeuThich.setHinhAnh(cursor.getString(4));  // Vị trí cột hinhAnh
-                    yeuThich.setCongThuc(cursor.getString(5));  // Vị trí cột congThuc
-                    yeuThich.setLichSu(cursor.getString(6));  // Vị trí cột lichSu
-                    yeuThich.setSangTao(cursor.getString(7));  // Vị trí cột sangTao
+                    yeuThich.setId(cursor.getInt(0));
+                    yeuThich.setTenMonAn(cursor.getString(1));
+                    yeuThich.setLoaiMonAn(cursor.getString(2));
+                    yeuThich.setVungMien(cursor.getString(3));
+                    yeuThich.setHinhAnh(cursor.getString(4));
+                    yeuThich.setCongThuc(cursor.getString(5));
+                    yeuThich.setLichSu(cursor.getString(6));
+                    yeuThich.setSangTao(cursor.getString(7));
                     yeuThich.setFavorite(cursor.getInt(8));
-
 
                     yeuThichList.add(yeuThich);
                 } while (cursor.moveToNext());
@@ -143,7 +158,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return yeuThichList;
     }
 
-
     public List<MonAn> getAllMonAn() {
         List<MonAn> monAnList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -152,15 +166,15 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 MonAn monAn = new MonAn();
-                monAn.setId(cursor.getInt(0));  // Vị trí cột _id
-                monAn.setTenMonAn(cursor.getString(1));  // Vị trí cột tenMonAn
-                monAn.setLoaiMonAn(cursor.getString(2));  // Vị trí cột loaiMonAn
-                monAn.setVungMien(cursor.getString(3));  // Vị trí cột vungMien
-                monAn.setHinhAnh(cursor.getString(4));  // Vị trí cột hinhAnh
-                monAn.setCongThuc(cursor.getString(5));  // Vị trí cột congThuc
-                monAn.setLichSu(cursor.getString(6));  // Vị trí cột lichSu
-                monAn.setSangTao(cursor.getString(7));  // Vị trí cột sangTao
-                monAn.setFarvorite(cursor.getInt(8) == 1);  // Vị trí cột favorite
+                monAn.setId(cursor.getInt(0));
+                monAn.setTenMonAn(cursor.getString(1));
+                monAn.setLoaiMonAn(cursor.getString(2));
+                monAn.setVungMien(cursor.getString(3));
+                monAn.setHinhAnh(cursor.getString(4));
+                monAn.setCongThuc(cursor.getString(5));
+                monAn.setLichSu(cursor.getString(6));
+                monAn.setSangTao(cursor.getString(7));
+                monAn.setFarvorite(cursor.getInt(8) == 1);
                 monAnList.add(monAn);
             } while (cursor.moveToNext());
         }
@@ -171,15 +185,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void updateFavorite(int monAnId, boolean isFavorite) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("favorite", isFavorite ? 1 : 0);  // Assuming `favorite` column is of type INTEGER
+        values.put("favorite", isFavorite ? 1 : 0);
         db.update("dacsan", values, "_id = ?", new String[]{String.valueOf(monAnId)});
         db.close();
     }
-
 
     @SuppressLint("Range")
     public MonAn getRandomMonan() {
@@ -225,5 +236,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         Log.d("DBHelper", "Random MonAn: " + (randomDish != null ? randomDish.getTenMonAn() : "No data"));
         return randomDish;
+    }
+
+    public void deleteUserAddedSpecialities() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("dacsan", "isUserAdded = 1", null);
+        db.close();
     }
 }
