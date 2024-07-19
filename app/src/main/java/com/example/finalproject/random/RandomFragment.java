@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.example.finalproject.DBHandler.DBHelper;
 import com.example.finalproject.R;
 import com.example.finalproject.TimKiem.MonAn;
@@ -48,11 +50,15 @@ public class RandomFragment extends Fragment {
         MonAn randomMonAn = dbHelper.getRandomMonan();
 
         if (randomMonAn != null) {
+            // Set dish image
             int resID = getContext().getResources().getIdentifier(randomMonAn.getHinhAnh(), "drawable", getContext().getPackageName());
             imageView.setImageResource(resID != 0 ? resID : R.drawable.error);
+
+            // Set dish name and type
             nameTextView.setText(randomMonAn.getTenMonAn());
             typeTextView.setText(randomMonAn.getLoaiMonAn());
         } else {
+            // Handle case where no dish is found
             nameTextView.setText("Không có món ăn nào");
             typeTextView.setText("");
             imageView.setImageResource(R.drawable.error);
