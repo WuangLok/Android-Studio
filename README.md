@@ -6,7 +6,7 @@
 
 ## Đề Tài : Đặc Sản Vùng Miền
 
-### Danh sách đặc sản theo vùng miền: Lộc
+### Danh sách đặc sản theo vùng miền: Hào
 - **Hiển thị danh sách đặc sản từ các vùng miền khác nhau:** Bắc, Trung, Nam.
 - **Phân loại theo loại đặc sản:** món ăn mặn, bánh kẹo, trái cây, thảo dược, đồ uống, v.v.
 
