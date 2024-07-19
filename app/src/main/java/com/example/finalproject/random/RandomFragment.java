@@ -46,11 +46,7 @@ public class RandomFragment extends Fragment {
 
         if (randomMonAn != null) {
             int resID = getContext().getResources().getIdentifier(randomMonAn.getHinhAnh(), "drawable", getContext().getPackageName());
-            if (resID != 0) {
-                imageView.setImageResource(resID);
-            } else {
-                imageView.setImageResource(R.drawable.error); // Placeholder image if drawable resource not found
-            }
+            imageView.setImageResource(resID != 0 ? resID : R.drawable.error);
             nameTextView.setText(randomMonAn.getTenMonAn());
             typeTextView.setText(randomMonAn.getLoaiMonAn());
         } else {

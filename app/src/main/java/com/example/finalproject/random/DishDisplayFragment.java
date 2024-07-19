@@ -33,7 +33,7 @@ public class DishDisplayFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         tvSuggestion = view.findViewById(R.id.tvSuggestion);
-        imgDish = view.findViewById(R.id.imgHinhAnh);
+        imgDish = view.findViewById(R.id.imgMonan);
         tvDishName = view.findViewById(R.id.tvtenMonan);
         tvDishType = view.findViewById(R.id.tvloaiMonan);
 
@@ -43,16 +43,15 @@ public class DishDisplayFragment extends Fragment {
         MonAn randomDish = dbHelper.getRandomMonan();
 
         if (randomDish != null) {
-
             tvDishName.setText(randomDish.getTenMonAn());
             tvDishType.setText(randomDish.getLoaiMonAn());
 
             int drawableId = getResources().getIdentifier(randomDish.getHinhAnh(), "drawable", getContext().getPackageName());
-            if (drawableId != 0) {
-                imgDish.setImageResource(drawableId);
-            } else {
-                imgDish.setImageResource(R.drawable.error);
-            }
+            imgDish.setImageResource(drawableId != 0 ? drawableId : R.drawable.error);
+        } else {
+            tvDishName.setText("Không có món ăn nào");
+            tvDishType.setText("");
+            imgDish.setImageResource(R.drawable.error);
         }
     }
 }

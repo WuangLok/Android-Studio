@@ -179,8 +179,6 @@ public class DBHelper extends SQLiteOpenHelper {
             db.close();
         }
 
-
-
     public MonAn getRandomMonan() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
@@ -216,10 +214,3 @@ public class DBHelper extends SQLiteOpenHelper {
         return randomDish;
     }
 }
-
-
-
-
-
-
-
