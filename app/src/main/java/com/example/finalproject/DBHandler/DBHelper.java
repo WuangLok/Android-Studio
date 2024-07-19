@@ -180,6 +180,38 @@ public class DBHelper extends SQLiteOpenHelper {
             db.update("dacsan", values, "_id = ?", new String[]{String.valueOf(monAnId)});
             db.close();
         }
+    public MonAn getRandomMonan() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        MonAn randomDish = null;
+
+        try {
+            String[] columns = {"_id", "tenMonAn", "loaiMonAn", "vungMien", "hinhAnh", "congThuc", "lichSu", "sangTao", "favorite"};
+            cursor = db.query("dacsan", columns, "favorite = 1", null, null, null, "RANDOM()", "1");
+
+            if (cursor != null && cursor.moveToFirst()) {
+                randomDish = new MonAn();
+                randomDish.setId(cursor.getInt(0));  // Vị trí cột _id
+                randomDish.setTenMonAn(cursor.getString(1));  // Vị trí cột tenMonAn
+                randomDish.setLoaiMonAn(cursor.getString(2));  // Vị trí cột loaiMonAn
+                randomDish.setVungMien(cursor.getString(3));  // Vị trí cột vungMien
+                randomDish.setHinhAnh(cursor.getString(4));  // Vị trí cột hinhAnh
+                randomDish.setCongThuc(cursor.getString(5));  // Vị trí cột congThuc
+                randomDish.setLichSu(cursor.getString(6));  // Vị trí cột lichSu
+                randomDish.setSangTao(cursor.getString(7));  // Vị trí cột sangTao
+                randomDish.setFarvorite(cursor.getInt(8) == 1);  // Vị trí cột favorite
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return randomDish;
+    }
     }
 
 

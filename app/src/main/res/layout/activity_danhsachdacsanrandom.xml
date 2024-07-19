@@ -1,12 +1,14 @@
-<!-- res/layout/activity_danhsachdacsanrandom.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".random.DanhSachDacSanRandom">
 
-    <ListView
-        android:id="@+id/lvDanhSachDacSan"
+    <!-- Placeholder for the fragment -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"/>
-</RelativeLayout>
+        android:layout_height="match_parent" />
+
+</FrameLayout>

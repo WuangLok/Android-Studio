@@ -1,42 +1,9 @@
-<!-- res/layout/customlistview_dacsan.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".random.DanhSachDacSanRandom">
 
-    <ImageView
-        android:id="@+id/item_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/bunbohue" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/item_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:text="Ten mon an"
-            android:textColor="#2196F3"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/item_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="loai mon an"
-            android:paddingLeft="20dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
