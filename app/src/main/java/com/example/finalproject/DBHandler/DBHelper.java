@@ -192,15 +192,28 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor = db.query("dacsan", columns, null, null, null, null, "RANDOM()", "1");
 
             if (cursor != null && cursor.moveToFirst()) {
-                randomDish = new MonAn();
-                randomDish.setId(cursor.getInt(cursor.getColumnIndex("_id")));
-                randomDish.setTenMonAn(cursor.getString(cursor.getColumnIndex("tenMonAn")));
-                randomDish.setLoaiMonAn(cursor.getString(cursor.getColumnIndex("loaiMonAn")));
-                randomDish.setVungMien(cursor.getString(cursor.getColumnIndex("vungMien")));
-                randomDish.setHinhAnh(cursor.getString(cursor.getColumnIndex("hinhAnh")));
-                randomDish.setCongThuc(cursor.getString(cursor.getColumnIndex("congThuc")));
-                randomDish.setLichSu(cursor.getString(cursor.getColumnIndex("lichSu")));
-                randomDish.setSangTao(cursor.getString(cursor.getColumnIndex("sangTao")));
+                int idIndex = cursor.getColumnIndex("_id");
+                int tenMonAnIndex = cursor.getColumnIndex("tenMonAn");
+                int loaiMonAnIndex = cursor.getColumnIndex("loaiMonAn");
+                int vungMienIndex = cursor.getColumnIndex("vungMien");
+                int hinhAnhIndex = cursor.getColumnIndex("hinhAnh");
+                int congThucIndex = cursor.getColumnIndex("congThuc");
+                int lichSuIndex = cursor.getColumnIndex("lichSu");
+                int sangTaoIndex = cursor.getColumnIndex("sangTao");
+
+                if (idIndex != -1 && tenMonAnIndex != -1 && loaiMonAnIndex != -1 && vungMienIndex != -1 &&
+                        hinhAnhIndex != -1 && congThucIndex != -1 && lichSuIndex != -1 && sangTaoIndex != -1) {
+
+                    randomDish = new MonAn();
+                    randomDish.setId(cursor.getInt(idIndex));
+                    randomDish.setTenMonAn(cursor.getString(tenMonAnIndex));
+                    randomDish.setLoaiMonAn(cursor.getString(loaiMonAnIndex));
+                    randomDish.setVungMien(cursor.getString(vungMienIndex));
+                    randomDish.setHinhAnh(cursor.getString(hinhAnhIndex));
+                    randomDish.setCongThuc(cursor.getString(congThucIndex));
+                    randomDish.setLichSu(cursor.getString(lichSuIndex));
+                    randomDish.setSangTao(cursor.getString(sangTaoIndex));
+                }
             }
         } catch (Exception e) {
             Log.e("DBHelper", "Error in getRandomMonan", e);
