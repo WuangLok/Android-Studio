@@ -26,20 +26,20 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Create the 'dacsan' table
-//        db.execSQL("CREATE TABLE dacsan (" +
-//                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-//                "tenMonAn TEXT," +
-//                "loaiMonAn TEXT," +
-//                "vungMien TEXT," +
-//                "hinhAnh TEXT," +
-//                "congThuc TEXT," +
-//                "lichSu TEXT," +
-//                "sangTao TEXT," +
-//                "favorite INTEGER DEFAULT 0" +  // Added a default value for 'favorite'
-//                ")");
+        db.execSQL("CREATE TABLE dacsan (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "tenMonAn TEXT," +
+                "loaiMonAn TEXT," +
+                "vungMien TEXT," +
+                "hinhAnh TEXT," +
+                "congThuc TEXT," +
+                "lichSu TEXT," +
+                "sangTao TEXT," +
+                "favorite INTEGER DEFAULT 0" +
+                ")");
 
         // Insert sample data
-//        insertSampleData(db);
+        insertSampleData(db);
     }
 
     @Override
@@ -178,6 +178,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.update("dacsan", values, "_id = ?", new String[]{String.valueOf(monAnId)});
             db.close();
         }
+
+
+
     public MonAn getRandomMonan() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
@@ -189,15 +192,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
             if (cursor != null && cursor.moveToFirst()) {
                 randomDish = new MonAn();
-                randomDish.setId(cursor.getInt(0));  // Vị trí cột _id
-                randomDish.setTenMonAn(cursor.getString(1));  // Vị trí cột tenMonAn
-                randomDish.setLoaiMonAn(cursor.getString(2));  // Vị trí cột loaiMonAn
-                randomDish.setVungMien(cursor.getString(3));  // Vị trí cột vungMien
-                randomDish.setHinhAnh(cursor.getString(4));  // Vị trí cột hinhAnh
-                randomDish.setCongThuc(cursor.getString(5));  // Vị trí cột congThuc
-                randomDish.setLichSu(cursor.getString(6));  // Vị trí cột lichSu
-                randomDish.setSangTao(cursor.getString(7));  // Vị trí cột sangTao
-                randomDish.setFarvorite(cursor.getInt(8) == 1);  // Vị trí cột favorite
+                randomDish.setId(cursor.getInt(0));
+                randomDish.setTenMonAn(cursor.getString(1));
+                randomDish.setLoaiMonAn(cursor.getString(2));
+                randomDish.setVungMien(cursor.getString(3));
+                randomDish.setHinhAnh(cursor.getString(4));
+                randomDish.setCongThuc(cursor.getString(5));
+                randomDish.setLichSu(cursor.getString(6));
+                randomDish.setSangTao(cursor.getString(7));
+                randomDish.setFarvorite(cursor.getInt(8) == 1);
+            } else {
+                Log.d("DBHelper", "No random dish found.");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,7 +215,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("DBHelper", "Random MonAn: " + (randomDish != null ? randomDish.getTenMonAn() : "No data"));
         return randomDish;
     }
-}
+
 
 
 
