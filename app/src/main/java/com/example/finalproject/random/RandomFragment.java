@@ -20,7 +20,7 @@ public class RandomFragment extends Fragment {
     private DBHelper dbHelper;
 
     public RandomFragment() {
-        // Required empty public constructor
+
     }
 
     public static RandomFragment newInstance() {
@@ -50,15 +50,12 @@ public class RandomFragment extends Fragment {
         MonAn randomMonAn = dbHelper.getRandomMonan();
 
         if (randomMonAn != null) {
-            // Set dish image
             int resID = getContext().getResources().getIdentifier(randomMonAn.getHinhAnh(), "drawable", getContext().getPackageName());
             imageView.setImageResource(resID != 0 ? resID : R.drawable.error);
 
-            // Set dish name and type
             nameTextView.setText(randomMonAn.getTenMonAn());
             typeTextView.setText(randomMonAn.getLoaiMonAn());
         } else {
-            // Handle case where no dish is found
             nameTextView.setText("Không có món ăn nào");
             typeTextView.setText("");
             imageView.setImageResource(R.drawable.error);

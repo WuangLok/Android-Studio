@@ -10,11 +10,11 @@
 - **Hiển thị danh sách đặc sản từ các vùng miền khác nhau:** Bắc, Trung, Nam.
 - **Phân loại theo loại đặc sản:** món ăn mặn, bánh kẹo, trái cây, thảo dược, đồ uống, v.v.
 
-### Chi tiết đặc sản: Hào
+### Chi tiết đặc sản: Hào + Lộc
 - **Thông tin chi tiết:** Cho phép người dùng xem thông tin chi tiết về một đặc sản cụ thể.
 - **Hiển thị:** hình ảnh, nguyên liệu, công thức làm, và lịch sử của đặc sản.
 
-### Tìm kiếm đặc sản: Lộc
+### Tìm kiếm đặc sản: Lộc + Hào
 - **Chức năng tìm kiếm:** Người dùng có thể tìm đặc sản dựa trên tên, loại, hoặc vùng miền.
 - **Kết quả tìm kiếm:** Hiển thị danh sách đặc sản phù hợp.
 
