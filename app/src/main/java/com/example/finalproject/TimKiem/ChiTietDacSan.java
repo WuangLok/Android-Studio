@@ -68,18 +68,5 @@ public class ChiTietDacSan extends AppCompatActivity {
         startActivity(Intent.createChooser(shareIntent, "Share using"));
     }
 
-    private void toggleFavorite() {
-        if (monAnId != -1) {
-            isFavorite = !isFavorite;
 
-            DBHelper dbHelper = new DBHelper(ChiTietDacSan.this);
-            dbHelper.updateFavorite(monAnId, isFavorite);
-
-            YeuThich.setImageResource(isFavorite ? R.drawable.redheart : R.drawable.emptyheart);
-
-            Intent intent = getIntent();
-            intent.putExtra("favorite", isFavorite);
-            setResult(RESULT_OK, intent);
-        }
-    }
 }

@@ -101,7 +101,9 @@ public class DongGopThongTinFragment extends Fragment {
                     details.append("Tên: ").append(speciality.getTenMonAn()).append("\n")
                             .append("Hình ảnh: ").append(speciality.getHinhAnh()).append("\n")
                             .append("Vùng miền: ").append(speciality.getVungMien()).append("\n")
+                            .append("Loại môn ăn: ").append(speciality.getLoaiMonAn()).append("\n")
                             .append("Lịch sử: ").append(speciality.getLichsu()).append("\n")
+                            .append("Công thức: ").append(speciality.getCongThuc()).append("\n")
                             .append("Sáng tạo: ").append(speciality.getsangtao()).append("\n\n");
                 }
 
@@ -197,17 +199,19 @@ public class DongGopThongTinFragment extends Fragment {
             if (name.isEmpty() || image.isEmpty() || region.isEmpty() || loaiMonAn.isEmpty() || lichsu.isEmpty() || sangtao.isEmpty() || congThuc.isEmpty()) {
                 Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             } else {
-                dbHelper.DongGopThongTin(name, loaiMonAn, region, image, congThuc, lichsu, sangtao);
+                dbHelper.DongGopThongTin(name, image, region, loaiMonAn, lichsu, congThuc, sangtao);
 
                 Speciality newSpeciality = new Speciality(
                         specialityList.size() + 1,
                         name,
-                        region,
                         image,
+                        region,
+                        loaiMonAn,
+                        congThuc,
                         lichsu,
                         sangtao,
-                        false,
-                        congThuc
+                        false
+
                 );
                 specialityList.add(newSpeciality);
                 adapter.notifyItemInserted(specialityList.size() - 1);
@@ -282,12 +286,14 @@ public class DongGopThongTinFragment extends Fragment {
             Speciality speciality = new Speciality(
                     monAn.getId(),
                     monAn.getTenMonAn(),
-                    monAn.getVungMien(),
                     monAn.getHinhAnh(),
+                    monAn.getVungMien(),
+                    monAn.getLoaiMonAn(),
                     monAn.getLichSu(),
+                    monAn.getCongThuc(),
                     monAn.getSangTao(),
-                    monAn.isFarvorite(),
-                    monAn.getCongThuc()
+                    monAn.isFarvorite()
+
             );
             specialityList.add(speciality);
         }

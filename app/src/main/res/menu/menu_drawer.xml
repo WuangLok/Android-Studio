@@ -12,6 +12,6 @@
         android:title="Thêm Món Ăn" />
     <item
         android:id="@+id/nav_random"
-        android:title="Danh Sách Ngẫu Nhiên"
+        android:title="Home"
         />
 </menu>
