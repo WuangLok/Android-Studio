@@ -67,7 +67,7 @@ public class AdapterYeuThich extends BaseAdapter {
 
         holder.txtName.setText(yeuThich.getTenMonAn());
         holder.txtType.setText(yeuThich.getLoaiMonAn());
-
+    
         if (yeuThich.getFavorite() == 1) {
             holder.btnHeart.setImageResource(R.drawable.redheart);
         } else {

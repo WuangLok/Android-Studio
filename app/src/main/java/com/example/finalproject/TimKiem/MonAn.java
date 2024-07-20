@@ -1,12 +1,23 @@
 package com.example.finalproject.TimKiem;
 
 public class MonAn {
- private int id;
- private String tenMonAn , loaiMonAn, vungMien,HinhAnh,CongThuc,LichSu,SangTao;
- private boolean farvorite;
+    private int id;
+    private String tenMonAn, loaiMonAn, vungMien, HinhAnh, CongThuc, LichSu, SangTao;
+    private boolean farvorite;
 
     public MonAn() {
+    }
 
+    public MonAn(int id, String tenMonAn, String loaiMonAn, String vungMien, String hinhAnh, String congThuc, String lichSu, String sangTao, boolean farvorite) {
+        this.id = id;
+        this.tenMonAn = tenMonAn;
+        this.loaiMonAn = loaiMonAn;
+        this.vungMien = vungMien;
+        HinhAnh = hinhAnh;
+        CongThuc = congThuc;
+        LichSu = lichSu;
+        SangTao = sangTao;
+        this.farvorite = farvorite;
     }
 
     public int getId() {
@@ -78,18 +89,6 @@ public class MonAn {
     }
 
     public void setFarvorite(boolean farvorite) {
-        this.farvorite = farvorite;
-    }
-
-    public MonAn(int id, String tenMonAn, String loaiMonAn, String vungMien, String hinhAnh, String congThuc, String lichSu, String sangTao, boolean farvorite) {
-        this.id = id;
-        this.tenMonAn = tenMonAn;
-        this.loaiMonAn = loaiMonAn;
-        this.vungMien = vungMien;
-        HinhAnh = hinhAnh;
-        CongThuc = congThuc;
-        LichSu = lichSu;
-        SangTao = sangTao;
         this.farvorite = farvorite;
     }
 }

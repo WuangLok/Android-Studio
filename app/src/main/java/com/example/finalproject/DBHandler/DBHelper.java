@@ -83,8 +83,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void insertSampleData(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
 
-        values.put("tenMonAn", "Pho");
-        values.put("loaiMonAn", "Món chính");
+        values.put("tenMonAn", "Phở");
+        values.put("loaiMonAn", "Món ăn no");
         values.put("vungMien", "Bắc");
         values.put("hinhAnh", "pho");
         values.put("congThuc", "Công thức phở");
@@ -95,8 +95,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("dacsan", null, values);
 
         values.clear();
-        values.put("tenMonAn", "Bun bo Hue");
-        values.put("loaiMonAn", "Món chính");
+        values.put("tenMonAn", "Bún Bò Huế");
+        values.put("loaiMonAn", "Món ăn no");
         values.put("vungMien", "Trung");
         values.put("hinhAnh", "bunbohue");
         values.put("congThuc", "Công thức bún bò Huế");
@@ -107,8 +107,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("dacsan", null, values);
 
         values.clear();
-        values.put("tenMonAn", "Hu Tieu Nam Vang");
-        values.put("loaiMonAn", "Món chính");
+        values.put("tenMonAn", "Hủ Tiếu Nam Vang");
+        values.put("loaiMonAn", "Món ăn no");
         values.put("vungMien", "Nam");
         values.put("hinhAnh", "hutieunamvang");
         values.put("congThuc", "Công thức hu tieu nam vang");

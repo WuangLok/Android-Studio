@@ -1,57 +1,38 @@
 package com.example.finalproject.TimKiem;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.finalproject.R;import android.content.Intent;
-import android.os.Bundle;
+import android.content.Intent;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import com.example.finalproject.DBHandler.DBHelper;
 import com.example.finalproject.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TimkiemdacsanFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class TimkiemdacsanFragment extends Fragment {
 
     private EditText edtTenMonAn;
-    private Button btnTimKiem , btnLamMoi;
+    private Button btnTimKiem;
     private ListView lvMonAn;
     private Spinner spnVungMien, spnLoaiMonAn;
     private ArrayList<MonAn> dsMonAn = new ArrayList<>();
+    private ArrayList<MonAn> allMonAn = new ArrayList<>(); // Danh sách gốc chứa tất cả các món ăn
     private AdapterDacSan adapterDacSan;
     private DBHelper dbHelper;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -59,15 +40,6 @@ public class TimkiemdacsanFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TimkiemdacsanFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static TimkiemdacsanFragment newInstance(String param1, String param2) {
         TimkiemdacsanFragment fragment = new TimkiemdacsanFragment();
         Bundle args = new Bundle();
@@ -84,13 +56,10 @@ public class TimkiemdacsanFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_timkiemdacsan, container, false);
         dbHelper = new DBHelper(getContext());
 
@@ -99,22 +68,13 @@ public class TimkiemdacsanFragment extends Fragment {
         lvMonAn = view.findViewById(R.id.lvDanhSach);
         spnVungMien = view.findViewById(R.id.SpinnerVungMien);
         spnLoaiMonAn = view.findViewById(R.id.SpinnerLoaiMonAn);
-        btnLamMoi = view.findViewById(R.id.btnLamMoi);
 
         adapterDacSan = new AdapterDacSan(getContext(), dsMonAn);
         lvMonAn.setAdapter(adapterDacSan);
 
         LoadSpinnerData();
         LoadSQLiteData();
-        btnLamMoi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                edtTenMonAn.setText("");
-                spnVungMien.setSelection(0);
-                spnLoaiMonAn.setSelection(0);
-                LoadSQLiteData();
-            }
-        });
+
 
         btnTimKiem.setOnClickListener(v -> {
             String tenMonAn = edtTenMonAn.getText().toString().trim();
@@ -191,18 +151,19 @@ public class TimkiemdacsanFragment extends Fragment {
     private void LoadSQLiteData() {
         try {
             dsMonAn.clear();
-            dsMonAn.addAll(dbHelper.getAllMonAn());
+            allMonAn.clear(); // Clear the original list
+            allMonAn.addAll(dbHelper.getAllMonAn()); // Load all data from SQLite
+            dsMonAn.addAll(allMonAn); // Initially display all items
             adapterDacSan.notifyDataSetChanged();
-            Log.d("DEBUG", "Data loaded from SQLite, size: " + dsMonAn.size());
+            Log.d("DEBUG", "Data loaded from SQLite, size: " + allMonAn.size());
         } catch (Exception e) {
             Log.e("ERROR", "Error loading data from SQLite: " + e.getMessage());
         }
     }
 
-
     private void TimKiemMonAn(String tenMonAn, String vungMien, String loaiMonAn) {
         ArrayList<MonAn> filteredList = new ArrayList<>();
-        for (MonAn monAn : dsMonAn) {
+        for (MonAn monAn : allMonAn) { // Use the original list for filtering
             boolean matchesRegion = vungMien.equals("Tất cả") || monAn.getVungMien().equals(vungMien);
             boolean matchesType = loaiMonAn.equals("Tất cả") || monAn.getLoaiMonAn().equals(loaiMonAn);
             boolean matchesTen = tenMonAn.isEmpty() || monAn.getTenMonAn().toLowerCase().contains(tenMonAn.toLowerCase());
@@ -219,7 +180,7 @@ public class TimkiemdacsanFragment extends Fragment {
 
     private void FilterByRegion(String vungMien) {
         ArrayList<MonAn> filteredList = new ArrayList<>();
-        for (MonAn monAn : dsMonAn) {
+        for (MonAn monAn : allMonAn) { // Use the original list for filtering
             if (vungMien.equals("Tất cả") || monAn.getVungMien().equals(vungMien)) {
                 filteredList.add(monAn);
             }
@@ -232,7 +193,7 @@ public class TimkiemdacsanFragment extends Fragment {
 
     private void FilterByType(String loaiMonAn) {
         ArrayList<MonAn> filteredList = new ArrayList<>();
-        for (MonAn monAn : dsMonAn) {
+        for (MonAn monAn : allMonAn) { // Use the original list for filtering
             if (loaiMonAn.equals("Tất cả") || monAn.getLoaiMonAn().equals(loaiMonAn)) {
                 filteredList.add(monAn);
             }

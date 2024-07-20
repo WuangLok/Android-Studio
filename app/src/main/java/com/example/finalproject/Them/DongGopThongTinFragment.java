@@ -1,39 +1,38 @@
 package com.example.finalproject.Them;
 
+import android.app.AlertDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.finalproject.R;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalproject.DBHandler.DBHelper;
+import com.example.finalproject.R;
 import com.example.finalproject.TimKiem.MonAn;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DongGopThongTinFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DongGopThongTinFragment extends Fragment {
 
     private Button btnSubmit;
@@ -43,13 +42,12 @@ public class DongGopThongTinFragment extends Fragment {
     private List<Speciality> specialityList;
     private SpecialityAdapter adapter;
     private DBHelper dbHelper;
+    private ImageView ivSelectedImage;
+    private TextView tvSelectedImage;
+    private String selectedImagePath;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -57,15 +55,6 @@ public class DongGopThongTinFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DongGopThongTinFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static DongGopThongTinFragment newInstance(String param1, String param2) {
         DongGopThongTinFragment fragment = new DongGopThongTinFragment();
         Bundle args = new Bundle();
@@ -87,7 +76,6 @@ public class DongGopThongTinFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dong_gop_thong_tin, container, false);
 
         btnSubmit = view.findViewById(R.id.btnSubmit);
@@ -169,13 +157,15 @@ public class DongGopThongTinFragment extends Fragment {
         builder.setView(dialogView);
 
         EditText etName = dialogView.findViewById(R.id.etName);
-        EditText etImage = dialogView.findViewById(R.id.etImage);
         Spinner spnRegion = dialogView.findViewById(R.id.spnRegion);
         Spinner spnLoaiMonAn = dialogView.findViewById(R.id.spnLoaiMonAn);
         EditText etLichsu = dialogView.findViewById(R.id.etLichsu);
         EditText etSangtao = dialogView.findViewById(R.id.etSangtao);
         EditText etCongThuc = dialogView.findViewById(R.id.etCongThuc);
         Button btnSubmit1 = dialogView.findViewById(R.id.btnSubmit1);
+        Button btnSelectImage = dialogView.findViewById(R.id.btnSelectImage);
+        ivSelectedImage = dialogView.findViewById(R.id.ivSelectedImage);
+        tvSelectedImage = dialogView.findViewById(R.id.tvSelectedImage);
 
         // Set up the region spinner
         ArrayAdapter<CharSequence> regionAdapter = ArrayAdapter.createFromResource(getContext(),
@@ -193,9 +183,11 @@ public class DongGopThongTinFragment extends Fragment {
         dialog.show();
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
+        btnSelectImage.setOnClickListener(v -> showImagePickerDialog());
+
         btnSubmit1.setOnClickListener(v -> {
             String name = etName.getText().toString();
-            String image = etImage.getText().toString();
+            String image = selectedImagePath != null ? selectedImagePath : "";
             String region = spnRegion.getSelectedItem().toString();
             String loaiMonAn = spnLoaiMonAn.getSelectedItem().toString();
             String lichsu = etLichsu.getText().toString();
@@ -228,6 +220,59 @@ public class DongGopThongTinFragment extends Fragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    private void showImagePickerDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_search_image, null);
+        builder.setView(dialogView);
+
+        EditText etSearchImage = dialogView.findViewById(R.id.etSearchImage);
+        ListView lvImages = dialogView.findViewById(R.id.lvImages);
+
+        String[] drawableNames = getDrawableNames();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, drawableNames);
+        lvImages.setAdapter(adapter);
+
+        etSearchImage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        lvImages.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedImageName = adapter.getItem(position);
+            selectedImagePath = selectedImageName;
+            int resID = getResources().getIdentifier(selectedImageName, "drawable", getContext().getPackageName());
+            ivSelectedImage.setImageResource(resID);
+            ivSelectedImage.setVisibility(View.VISIBLE);
+            tvSelectedImage.setText(selectedImageName);
+            tvSelectedImage.setVisibility(View.VISIBLE);
+            builder.create().dismiss();
+        });
+
+        builder.setTitle("Chọn ảnh từ drawable")
+                .setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+    private String[] getDrawableNames() {
+        Field[] fields = R.drawable.class.getDeclaredFields();
+        List<String> drawableNames = new ArrayList<>();
+        for (Field field : fields) {
+            if (!field.getName().startsWith("notify") && !field.getName().startsWith("abc")) { // Exclude common unwanted drawables
+                drawableNames.add(field.getName());
+            }
+        }
+        return drawableNames.toArray(new String[0]);
     }
 
     private void loadSpecialitiesFromDatabase() {

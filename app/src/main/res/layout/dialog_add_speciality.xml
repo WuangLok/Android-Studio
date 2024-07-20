@@ -1,72 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/etName"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tên món ăn" />
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/etImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Hình ảnh" />
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên món ăn" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Vùng miền:"
-        android:textStyle="bold"
-        android:textColor="#979797"
-        android:textSize="16sp"
-        android:paddingTop="8dp" />
+        <TextView
+            android:id="@+id/tvSelectedImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:textColor="@android:color/black" />
 
-    <Spinner
-        android:id="@+id/spnRegion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnSelectImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn ảnh" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Loại đặc sản:"
-        android:textStyle="bold"
-        android:textColor="#979797"
-        android:textSize="16sp"
-        android:paddingTop="8dp" />
+        <ImageView
+            android:id="@+id/ivSelectedImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
 
-    <Spinner
-        android:id="@+id/spnLoaiMonAn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vùng miền:"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:paddingTop="8dp" />
 
-    <EditText
-        android:id="@+id/etLichsu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Lịch sử" />
+            <Spinner
+                android:id="@+id/spnRegion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/etSangtao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Sáng tạo" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loại đặc sản:"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:paddingTop="8dp" />
 
-    <EditText
-        android:id="@+id/etCongThuc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Công thức" />
+            <Spinner
+                android:id="@+id/spnLoaiMonAn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSubmit1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thêm đặc sản" />
+        <EditText
+            android:id="@+id/etLichsu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Lịch sử" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/etSangtao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sáng tạo" />
+
+        <EditText
+            android:id="@+id/etCongThuc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Công thức" />
+
+        <Button
+            android:id="@+id/btnSubmit1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thêm đặc sản" />
+
+    </LinearLayout>
+</ScrollView>
