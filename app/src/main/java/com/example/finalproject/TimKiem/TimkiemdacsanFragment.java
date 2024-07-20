@@ -39,7 +39,7 @@ import java.util.List;
 public class TimkiemdacsanFragment extends Fragment {
 
     private EditText edtTenMonAn;
-    private Button btnTimKiem;
+    private Button btnTimKiem , btnLamMoi;
     private ListView lvMonAn;
     private Spinner spnVungMien, spnLoaiMonAn;
     private ArrayList<MonAn> dsMonAn = new ArrayList<>();
@@ -99,12 +99,22 @@ public class TimkiemdacsanFragment extends Fragment {
         lvMonAn = view.findViewById(R.id.lvDanhSach);
         spnVungMien = view.findViewById(R.id.SpinnerVungMien);
         spnLoaiMonAn = view.findViewById(R.id.SpinnerLoaiMonAn);
+        btnLamMoi = view.findViewById(R.id.btnLamMoi);
 
         adapterDacSan = new AdapterDacSan(getContext(), dsMonAn);
         lvMonAn.setAdapter(adapterDacSan);
 
         LoadSpinnerData();
         LoadSQLiteData();
+        btnLamMoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtTenMonAn.setText("");
+                spnVungMien.setSelection(0);
+                spnLoaiMonAn.setSelection(0);
+                LoadSQLiteData();
+            }
+        });
 
         btnTimKiem.setOnClickListener(v -> {
             String tenMonAn = edtTenMonAn.getText().toString().trim();
@@ -188,6 +198,7 @@ public class TimkiemdacsanFragment extends Fragment {
             Log.e("ERROR", "Error loading data from SQLite: " + e.getMessage());
         }
     }
+
 
     private void TimKiemMonAn(String tenMonAn, String vungMien, String loaiMonAn) {
         ArrayList<MonAn> filteredList = new ArrayList<>();

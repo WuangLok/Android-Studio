@@ -2,4 +2,21 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="c1">#8E67B2</color>
+    <color name="c2">#C78BBA</color>
+    <color name="c3">#F8B3D0</color>
+    <color name="c4">#8B83D6</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FF5722</color>
+    <color name="colorAccent">#FF5722</color>
+
+    <!-- Màu cho các thành phần văn bản -->
+    <color name="textPrimary">#333333</color>
+    <color name="textSecondary">#AAAAAA</color>
+
+    <!-- Màu nền cho các thành phần như EditText, Button, etc. -->
+    <color name="backgroundPrimary">#FFFFFF</color>
+
+    <!-- Màu cho đường viền hoặc phân chia các phần tử giao diện -->
+    <color name="divider">#DDDDDD</color>+
 </resources>

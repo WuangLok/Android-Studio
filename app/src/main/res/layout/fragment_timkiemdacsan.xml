@@ -2,52 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <EditText
         android:id="@+id/EdtTenMonAn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tên Món Ăn"
-        android:inputType="text" />
+        android:inputType="text"
+        android:background="@android:drawable/edit_text"
+        android:textColorHint="@color/textSecondary"
+        android:padding="12dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Vùng miền:"
         android:textStyle="bold"
-        android:textColor="#979797"
-        android:textSize="16sp"
-        android:paddingTop="8dp" />
+        android:textColor="@color/textPrimary"
+        android:textSize="18sp"
+        android:padding="12dp" />
 
     <Spinner
         android:id="@+id/SpinnerVungMien"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:popupBackground="@color/c1"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Loại đặc sản:"
         android:textStyle="bold"
-        android:textColor="#979797"
-        android:textSize="16sp"
-        android:paddingTop="8dp" />
+        android:textColor="@color/textPrimary"
+        android:textSize="18sp"
+        android:padding="12dp" />
 
     <Spinner
         android:id="@+id/SpinnerLoaiMonAn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:popupBackground="@color/c1"/>
 
-    <Button
-        android:id="@+id/btnTim"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tìm Kiếm" />
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <Button
+            android:id="@+id/btnTim"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tìm Kiếm"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+           />
+
+        <Button
+            android:id="@+id/btnLamMoi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Làm mới"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"/>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lvDanhSach"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:divider="@color/divider"
+        android:dividerHeight="1dp"/>
 </LinearLayout>
